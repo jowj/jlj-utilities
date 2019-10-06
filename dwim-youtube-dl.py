@@ -5,8 +5,8 @@ import shutil
 from pathlib import Path
 
 if __name__ == '__main__':
-    MUSIC_DEST = 
-    VIDEO_DEST = 
+    MUSIC_DEST =
+    VIDEO_DEST =
 
     PARSER = argparse.ArgumentParser()
     PARSER.add_argument('-t', '--type', help="aud or vid?", type=str)
