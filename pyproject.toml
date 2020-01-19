@@ -6,6 +6,7 @@ authors = ["jowj <me@jowj.net>"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
+whois = "^0.9.5"
 
 [tool.poetry.dev-dependencies]
 
