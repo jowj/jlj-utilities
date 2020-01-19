@@ -11,7 +11,12 @@ youtube-dl is fucking amazing. its one of the coolest / most useful things maint
 - declare a flag that determines what library the target should go to
   - video vs audio right now
   
-### DWIM naming history
+## get-domain-status
+using the whois package, get the status of my domains. send an email under the following conditions:
+- the domain is < 90 days away from expiring
+- the SSL is < 30 days away from expiring
+
+# DWIM naming history
 
 dwim comes from someone in the history of LISP. i like the connotation of doing what /i/, in particular, mean, rather than the general 'try and figure out what i mean' that it has in history.
 
