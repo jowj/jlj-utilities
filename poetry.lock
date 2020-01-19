@@ -1,0 +1,16 @@
+[[package]]
+category = "main"
+description = "Python package for retrieving WHOIS information of domains."
+name = "whois"
+optional = false
+python-versions = "*"
+version = "0.9.5"
+
+[metadata]
+content-hash = "95fa913a055b45bd7b7cf0049f61b7bdbc722adc80db08a2de030cb966f7753b"
+python-versions = "^3.8"
+
+[metadata.files]
+whois = [
+    {file = "whois-0.9.5.tar.gz", hash = "sha256:7958e2ae442c888b6d666a966c2469ca477e3c367f813807b6ce9a83ac12802f"},
+]
