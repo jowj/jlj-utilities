@@ -17,10 +17,11 @@ using the whois package, get the status of my domains. send an email under the f
 - the SSL is < 30 days away from expiring
 
 ### todo:
-- [ ] wait until the .club tld support is merged in, add my other domains to the list of shit to check
-- [ ] add SSL checking to the script
+- [X] wait until the .club tld support is merged in, add my other domains to the list of shit to check
+- [X] add SSL checking to the script
 - [ ] add email / slack alerting to the script.
-- [ ] eventually move this to the `arke` project so that its deployed to my servers and alerted on consistently
+  - actually, just move this to the `arke` project so that its deployed to my servers and alerted on consistently
+  - and i won't have to re-implement notification logic! nice.
 
 # DWIM naming history
 
