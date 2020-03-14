@@ -1,40 +1,55 @@
 import os
+import sys
 import argparse
 import subprocess
-import shutil
-from pathlib import Path
+import logging
 
-if __name__ == '__main__':
-    MUSIC_DEST =
-    VIDEO_DEST =
+logger = logging.getLogger(__name__)
 
-    PARSER = argparse.ArgumentParser()
-    PARSER.add_argument('-t', '--type', help="aud or vid?", type=str)
-    PARSER.add_argument('-u', '--url', help="link?", type=str)
 
-    ARGS = PARSER.parse_args()
+def main(*args, **kwargs):
+    """Main program entrypoint
+    """
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--type', '-t', help="music or video?", type=str)
+    parser.add_argument('--url', '-u', help="link?", type=str)
+    parser.add_argument("--debug", "-d", action="store_true")
+    parser.add_argument("--logfile", "-l", type=str)  # should this be File?
+    parsed = parser.parse_args()
+    loglevel = logging.INFO
 
-    TEMP_PATH = os.getcwd() + '/temp'
-    os.mkdir(TEMP_PATH)
-    os.chdir(TEMP_PATH)
+    if parsed.debug:
+        loglevel = logging.DEBUG
+    logger.setLevel(loglevel)
 
-    if ARGS.type == 'music':
+    if parsed.logfile:
+        fh = logging.FileHandler(parsed.logfile)
+        fh.setLevel(loglevel)
+        fh.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
+        logger.addHandler(fh)
+    logger.debug("Configured logging, nice")
+
+    temp_path = os.getcwd() + '/temp'
+    if os.path.exists(temp_path):
+        os.chdir(temp_path)
+    else:
+        os.mkdir(temp_path)
+        os.chdir(temp_path)
+
+    if parsed.type == 'music':
         # this will download a video an convert to just mp3
-        URL = ARGS.url
-        DEST_ROOT = MUSIC_DEST
+        url = parsed.url
         subprocess.call(["youtube-dl", "-i", "--extract-audio",
                          "--audio-format", "mp3", "--yes-playlist",
                          "-o", "%(playlist_title)s/%(title)s.%(ext)s",
-                         URL])
-    if ARGS.type == 'video':
+                         url])
+    if parsed.type == 'video':
         # this actually downloads the videos in a playlist to seperate files.
-        URL = ARGS.url
-        DEST_ROOT = VIDEO_DEST
+        url = parsed.url
         subprocess.call(["youtube-dl", "-i", "-f"
                          "mp4", "-o", "%(playlist_title)s/%(title)s.%(ext)s",
-                         URL])
+                         url])
 
-    PLAYLIST = os.listdir(".")
-    DEST = DEST_ROOT + "/" + PLAYLIST[0]
-    shutil.move(PLAYLIST[0], DEST)
-    os.rmdir(TEMP_PATH)
+
+if __name__ == '__main__':
+    sys.exit(main(*sys.argv))
